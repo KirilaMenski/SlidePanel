@@ -6,14 +6,13 @@ import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.PopupMenu;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * Created by kirill on 12.7.17.
@@ -28,7 +27,7 @@ public class SlidePanel extends FrameLayout implements View.OnTouchListener {
         BOTTOM
     }
 
-    public static final String RIGHT_POSITION = "right";
+    private MenuInflater mMenuInflanter;
 
     private int mWidth;
     private int mLeftPanelWidth;
@@ -39,6 +38,9 @@ public class SlidePanel extends FrameLayout implements View.OnTouchListener {
     private int mXDelta;
     private int mMarginLeft;
     private int mMargin;
+
+    private int mTintItem;
+    private int mTintBackground;
 
     private static final String TAG = SlidePanel.class.getSimpleName();
 
@@ -58,15 +60,8 @@ public class SlidePanel extends FrameLayout implements View.OnTouchListener {
         mWidth = mLeftPanelWidth + mRightPanelWidth;
 
         mMenu = typedArray.getResourceId(R.styleable.SlidePanel_menu, -1);
+        mMenuInflanter = new MenuInflater(context, this, mMenu, mTintItem, mTintBackground, mRightPanelWidth);
         typedArray.recycle();
-
-        //TODO Parse xml menu resource to display menu items in panel
-        PopupMenu popupMenu = new PopupMenu(getContext(), null);
-        Menu menu = popupMenu.getMenu();
-        ((Activity) getContext()).getMenuInflater().inflate(mMenu, menu);
-        Log.i(TAG, "Menu: " + menu.getItem(0).getItemId());
-        Log.i(TAG, "Menu: " + menu.getItem(0).getTitle());
-        Log.i(TAG, "Menu: " + menu.getItem(0).getIcon());
 
     }
 

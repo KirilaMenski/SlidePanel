@@ -20,23 +20,6 @@
         android:layout_height="match_parent"
         android:background="@android:color/holo_red_dark"
         android:gravity="center"
-        app:menu="@menu/panel_menu">
-
-        <TextView
-            android:id="@+id/first"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            android:textColor="@color/colorPrimaryDark"/>
-
-        <TextView
-            android:id="@+id/second"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            android:textColor="@color/colorPrimaryDark"/>
-
-    </com.ansgar.slidepanel.SlidePanel>
-
+        app:menu="@menu/panel_menu"/>
 
 </RelativeLayout>
