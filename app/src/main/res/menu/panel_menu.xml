@@ -17,5 +17,21 @@
         android:enabled="true"
         android:title="Title 3"/>
 
+    <item
+        android:id="@+id/date1"
+        android:enabled="true"
+        android:title="For example"
+        android:icon="@android:drawable/ic_dialog_info"/>
+
+    <item
+        android:id="@+id/name1"
+        android:enabled="true"
+        android:title="Title 2"/>
+
+    <item
+        android:id="@+id/mission1"
+        android:enabled="true"
+        android:title="Title 3"/>
+
 
 </menu>

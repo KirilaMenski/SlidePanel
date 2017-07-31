@@ -50,7 +50,7 @@ public class MenuInflater {
 
         mParentLinear = new LinearLayout(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mWidth, ViewGroup.LayoutParams.MATCH_PARENT);
-        mParentLinear.setLayoutParams(params);
+        mParentLinear.setOrientation(LinearLayout.VERTICAL);
 
         for (int i = 0; i < mMenu.size(); i++) {
             MenuItem menuItem = new MenuItem(mMenu.getItem(i).getItemId(),
@@ -61,12 +61,11 @@ public class MenuInflater {
             mMenuItems.add(menuItem);
 
             LinearLayout linearLayout = new LinearLayout(mContext);
-            LinearLayout.LayoutParams childParams = new LinearLayout.LayoutParams(100, 100);
+            LinearLayout.LayoutParams childParams = new LinearLayout.LayoutParams(mWidth, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
 
             TextView text = new TextView(mContext);
             text.setLayoutParams(new LinearLayout.LayoutParams(mWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
             text.setText(mMenuItems.get(i).getTitle());
-            text.setBackgroundColor(Color.BLUE);
 
             linearLayout.setLayoutParams(childParams);
             linearLayout.addView(text);
