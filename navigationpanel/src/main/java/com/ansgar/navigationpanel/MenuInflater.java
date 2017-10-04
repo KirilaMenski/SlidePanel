@@ -1,11 +1,10 @@
-package com.ansgar.slidepanel;
+package com.ansgar.navigationpanel;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.ViewGroup;

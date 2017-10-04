@@ -1,4 +1,4 @@
-package com.ansgar.slidepanel;
+package com.ansgar.navigationpanel;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SlidePanel">
-        <attr name="left_panel" format="dimension"/>
-        <attr name="right_panel" format="dimension"/>
         <attr name="menu" format="reference"/>
         <attr name="text_color" format="color"/>
         <attr name="text_tint" format="color"/>
