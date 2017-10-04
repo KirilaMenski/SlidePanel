@@ -1,69 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.ansgar.slidepanel.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello Worldasdasdsaasdsadasdasdasndasjdnanjdaskdnajsdjksandnkasdnkasjdajsndnksajdnasndasndasnjdansdnajsdnjsdj asjdasjd!"
-        android:textColor="@color/colorPrimaryDark"/>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/right_navigation_menu"
-        android:layout_alignParentRight="true">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/slide"
-            android:layout_toStartOf="@+id/slide"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/arrow_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/navigation_menu"
-                android:clickable="true"
-                android:gravity="center"
-                android:paddingLeft="@dimen/arrow_padding">
-
-                <ImageView
-                    android:id="@+id/arrow_ic"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_arrow"/>
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/separator"
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="#2d393e"/>
-
-        </LinearLayout>
-
-        <com.ansgar.slidepanel.SlidePanel
-            android:id="@+id/slide"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_red_dark"
-            android:gravity="center"
-            app:menu="@menu/panel_menu"
-            app:text_color="@android:color/black"
-            app:text_tint="@android:color/white"
-            app:tint_item_background="@color/colorPrimaryDark"/>
-    </LinearLayout>
 
 </RelativeLayout>

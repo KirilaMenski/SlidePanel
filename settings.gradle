@@ -1,1 +1,1 @@
-include ':app', ':navigationpanel'
+include ':app'
