@@ -4,6 +4,7 @@
         <attr name="left_panel" format="dimension"/>
         <attr name="right_panel" format="dimension"/>
         <attr name="menu" format="reference"/>
+        <attr name="divider" format="reference"/>
         <attr name="text_color" format="color"/>
         <attr name="text_tint" format="color"/>
         <attr name="tint_item_background" format="color"/>

@@ -28,8 +28,9 @@ public class SlidePanel extends FrameLayout {
         int textTint = typedArray.getColor(R.styleable.SlidePanel_text_tint, Color.BLACK);
         int tintBackground = typedArray.getColor(R.styleable.SlidePanel_tint_item_background, Color.TRANSPARENT);
 
+        int divider = typedArray.getResourceId(R.styleable.SlidePanel_divider, -1);
         int menu = typedArray.getResourceId(R.styleable.SlidePanel_menu, -1);
-        mMenuInflater = new MenuInflater(context, this, menu, textColor, textTint, tintBackground);
+        mMenuInflater = new MenuInflater(context, this, menu, textColor, textTint, tintBackground, divider);
         typedArray.recycle();
 
     }

@@ -5,13 +5,20 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kirill on 31.7.17.
@@ -30,17 +37,30 @@ public class MenuInflater {
     private Drawable mPreviousDrawable;
 
     public MenuInflater(Context context, FrameLayout parentView, int menuResource, int textColor,
-                        int textTint, int tintBackground) {
+                        int textTint, int tintBackground, int dividerId) {
         mContext = context;
         PopupMenu popupMenu = new PopupMenu(context, null);
         mMenu = popupMenu.getMenu();
-        ((Activity) context).getMenuInflater().inflate(menuResource, mMenu);
+        android.view.MenuInflater inflater = ((Activity) context).getMenuInflater();
+        inflater.inflate(menuResource, mMenu);
 
         mParentFrame = parentView;
-        generateMenuItems(textTint, textColor, tintBackground);
+        ViewGroup dividerLayout = (ViewGroup) LayoutInflater.from(context).inflate(dividerId, null);
+        generateMenuItems(textTint, textColor, tintBackground, dividerLayout);
     }
 
-    private void generateMenuItems(final int textTint, final int textColor, int tintBackground) {
+//    private List<View> getDividerViews(ViewGroup layout) {
+//        List<View> dividers = new ArrayList<>();
+//        if (layout == null) return dividers;
+//        for (int i = 0; i < layout.getChildCount(); i++) {
+//            View divider = layout.getChildAt(i);
+//            Log.i("!!!!!!", "Divider: " + divider.getId() + ", " + divider.getHeight());
+//            if (divider instanceof View) dividers.add(divider);
+//        }
+//        return dividers;
+//    }
+
+    private void generateMenuItems(final int textTint, final int textColor, int tintBackground, ViewGroup divider) {
 
         LinearLayout parentLinear = new LinearLayout(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -94,6 +114,25 @@ public class MenuInflater {
             });
 
             parentLinear.addView(linearLayout);
+            if (i != mMenu.size() - 1) {
+                LinearLayout dividerGroup = new LinearLayout(mContext);
+                LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dividerGroup.setLayoutParams(dividerParams);
+                dividerGroup.setOrientation(LinearLayout.VERTICAL);
+                for (int j = 0; j < divider.getChildCount(); j++) {
+                    if (divider.getChildAt(j) != null) {
+                        View child = divider.getChildAt(j);
+
+                        View dividerChild = new View(mContext);
+                        dividerChild.setLayoutParams(child.getLayoutParams());
+                        dividerChild.setBackground(child.getBackground());
+
+                        dividerGroup.addView(dividerChild);
+                    }
+                }
+
+                parentLinear.addView(dividerGroup);
+            }
         }
 
         mParentFrame.addView(parentLinear);
