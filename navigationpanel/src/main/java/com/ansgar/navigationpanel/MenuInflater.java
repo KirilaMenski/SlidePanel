@@ -64,6 +64,7 @@ public class MenuInflater {
         parentLinear.setLayoutParams(params);
         parentLinear.setOrientation(LinearLayout.VERTICAL);
 
+        Log.i("MenuInflanter", "Size: " + mMenu.size());
         for (int i = 0; i < mMenu.size(); i++) {
             MenuItem menuItem = new MenuItem(mMenu.getItem(i).getItemId(),
                     mMenu.getItem(i).getTitle().toString(),
@@ -79,14 +80,14 @@ public class MenuInflater {
 
             final TextView text = new TextView(mContext);
 
+            Log.i("MenuInflanter", "Index: " + index);
             if (index == mMenu.getItem(i).getItemId()) {
                 changeItem = mMenu.getItem(i).getItemId() == index;
                 linearLayout.setBackgroundColor(menuItem.getTintBackground());
                 mPreviousLinear = linearLayout;
                 mPreviousText = text;
                 mPreviousDrawable = mMenu.getItem(i).getIcon();
-            } else
-            if (index == i) {
+            } else if (index == i) {
                 changeItem = true;
                 linearLayout.setBackgroundColor(menuItem.getTintBackground());
                 mPreviousLinear = linearLayout;
