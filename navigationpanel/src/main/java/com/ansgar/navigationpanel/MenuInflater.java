@@ -39,7 +39,8 @@ public class MenuInflater {
     private Drawable mPreviousDrawable;
 
     public MenuInflater(Context context, FrameLayout parentView, int menuResource, int textColor,
-                        int textTint, int tintBackground, int dividerId, int textSize, String textStyle) {
+                        int textTint, int tintBackground, int dividerId, int textSize, String textStyle,
+                        int drawablePadding) {
         mContext = context;
         PopupMenu popupMenu = new PopupMenu(context, null);
         mMenu = popupMenu.getMenu();
@@ -50,7 +51,7 @@ public class MenuInflater {
         ViewGroup dividerLayout = (ViewGroup) LayoutInflater.from(context).inflate(dividerId, null);
 
         Typeface style = getStyle(context, textStyle);
-        generateMenuItems(textTint, textColor, textSize, tintBackground, style, dividerLayout);
+        generateMenuItems(textTint, textColor, textSize, tintBackground, style, drawablePadding, dividerLayout);
     }
 
 //    private List<View> getDividerViews(ViewGroup layout) {
@@ -65,7 +66,8 @@ public class MenuInflater {
 //    }
 
     private void generateMenuItems(final int textTint, final int textColor, int textSize,
-                                   int tintBackground, Typeface textStyle, ViewGroup divider) {
+                                   int tintBackground, Typeface textStyle, int drawablePadding,
+                                   ViewGroup divider) {
 
         LinearLayout parentLinear = new LinearLayout(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -93,6 +95,7 @@ public class MenuInflater {
             if (textStyle != null) text.setTypeface(textStyle);
             text.setTextColor(textColor);
             text.setCompoundDrawablesWithIntrinsicBounds(null, menuItem.getIcon(), null, null);
+            text.setCompoundDrawablePadding(drawablePadding);
 
             linearLayout.setLayoutParams(childParams);
             linearLayout.addView(text);
