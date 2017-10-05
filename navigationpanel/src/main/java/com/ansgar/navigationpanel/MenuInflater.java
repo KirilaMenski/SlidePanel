@@ -40,7 +40,7 @@ public class MenuInflater {
 
     public MenuInflater(Context context, FrameLayout parentView, int menuResource, int textColor,
                         int textTint, int tintBackground, int dividerId, int textSize, String textStyle,
-                        int drawablePadding) {
+                        int drawablePadding, int index) {
         mContext = context;
         PopupMenu popupMenu = new PopupMenu(context, null);
         mMenu = popupMenu.getMenu();
@@ -51,23 +51,12 @@ public class MenuInflater {
         ViewGroup dividerLayout = (ViewGroup) LayoutInflater.from(context).inflate(dividerId, null);
 
         Typeface style = getStyle(context, textStyle);
-        generateMenuItems(textTint, textColor, textSize, tintBackground, style, drawablePadding, dividerLayout);
+        generateMenuItems(textTint, textColor, textSize, tintBackground, style, drawablePadding, dividerLayout, index);
     }
-
-//    private List<View> getDividerViews(ViewGroup layout) {
-//        List<View> dividers = new ArrayList<>();
-//        if (layout == null) return dividers;
-//        for (int i = 0; i < layout.getChildCount(); i++) {
-//            View divider = layout.getChildAt(i);
-//            Log.i("!!!!!!", "Divider: " + divider.getId() + ", " + divider.getHeight());
-//            if (divider instanceof View) dividers.add(divider);
-//        }
-//        return dividers;
-//    }
 
     private void generateMenuItems(final int textTint, final int textColor, int textSize,
                                    int tintBackground, Typeface textStyle, int drawablePadding,
-                                   ViewGroup divider) {
+                                   ViewGroup divider, int index) {
 
         LinearLayout parentLinear = new LinearLayout(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -82,19 +71,32 @@ public class MenuInflater {
                     textTint,
                     tintBackground);
 
+            boolean changeItem = false;
+
             final LinearLayout linearLayout = new LinearLayout(mContext);
             LinearLayout.LayoutParams childParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
 
             final TextView text = new TextView(mContext);
+
+            if (index == mMenu.getItem(i).getItemId()) {
+                changeItem = mMenu.getItem(i).getItemId() == index;
+                linearLayout.setBackgroundColor(menuItem.getTintBackground());
+                mPreviousLinear = linearLayout;
+                mPreviousText = text;
+                mPreviousDrawable = mMenu.getItem(i).getIcon();
+            }
+
             text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             text.setText(menuItem.getTitle());
             text.setGravity(Gravity.CENTER);
             text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
             if (textStyle != null) text.setTypeface(textStyle);
-            text.setTextColor(textColor);
-            text.setCompoundDrawablesWithIntrinsicBounds(null, menuItem.getIcon(), null, null);
+            text.setTextColor(changeItem ? textTint : textColor);
+            Drawable icon = menuItem.getIcon();
+            icon.setColorFilter(changeItem ? textTint : Color.TRANSPARENT, PorterDuff.Mode.SRC_ATOP);
+            text.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
             text.setCompoundDrawablePadding(drawablePadding);
 
             linearLayout.setLayoutParams(childParams);
@@ -156,7 +158,6 @@ public class MenuInflater {
         Typeface type = Typeface.createFromAsset(context.getAssets(), font);
         return type;
     }
-
 
     public void setListener(OnClickMenuItemListener listener) {
         mListener = listener;
