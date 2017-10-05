@@ -85,6 +85,13 @@ public class MenuInflater {
                 mPreviousLinear = linearLayout;
                 mPreviousText = text;
                 mPreviousDrawable = mMenu.getItem(i).getIcon();
+            } else
+            if (index == i) {
+                changeItem = true;
+                linearLayout.setBackgroundColor(menuItem.getTintBackground());
+                mPreviousLinear = linearLayout;
+                mPreviousText = text;
+                mPreviousDrawable = mMenu.getItem(i).getIcon();
             }
 
             text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
