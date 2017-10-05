@@ -87,8 +87,8 @@ public class MenuInflater {
                     ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
 
             final TextView text = new TextView(mContext);
-            text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
+            text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
             text.setText(menuItem.getTitle());
             text.setGravity(Gravity.CENTER);
             text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
