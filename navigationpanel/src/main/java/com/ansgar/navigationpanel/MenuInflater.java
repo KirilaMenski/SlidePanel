@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,7 +38,7 @@ public class MenuInflater {
     private Drawable mPreviousDrawable;
 
     public MenuInflater(Context context, FrameLayout parentView, int menuResource, int textColor,
-                        int textTint, int tintBackground, int dividerId) {
+                        int textTint, int tintBackground, int dividerId, int textSize, String textStyle) {
         mContext = context;
         PopupMenu popupMenu = new PopupMenu(context, null);
         mMenu = popupMenu.getMenu();
@@ -46,7 +47,9 @@ public class MenuInflater {
 
         mParentFrame = parentView;
         ViewGroup dividerLayout = (ViewGroup) LayoutInflater.from(context).inflate(dividerId, null);
-        generateMenuItems(textTint, textColor, tintBackground, dividerLayout);
+
+        Typeface style = getStyle(context, textStyle);
+        generateMenuItems(textTint, textColor, textSize, tintBackground, style, dividerLayout);
     }
 
 //    private List<View> getDividerViews(ViewGroup layout) {
@@ -60,7 +63,8 @@ public class MenuInflater {
 //        return dividers;
 //    }
 
-    private void generateMenuItems(final int textTint, final int textColor, int tintBackground, ViewGroup divider) {
+    private void generateMenuItems(final int textTint, final int textColor, int textSize,
+                                   int tintBackground, Typeface textStyle, ViewGroup divider) {
 
         LinearLayout parentLinear = new LinearLayout(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -84,6 +88,9 @@ public class MenuInflater {
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             text.setText(menuItem.getTitle());
             text.setGravity(Gravity.CENTER);
+            text.setTextSize(textSize);
+            if (textStyle != null) text.setTypeface(textStyle);
+            text.setTextColor(textColor);
             text.setCompoundDrawablesWithIntrinsicBounds(null, menuItem.getIcon(), null, null);
 
             linearLayout.setLayoutParams(childParams);
@@ -138,6 +145,13 @@ public class MenuInflater {
         mParentFrame.addView(parentLinear);
 
     }
+
+    private static Typeface getStyle(Context context, String font) {
+        if (font == null) return null;
+        Typeface type = Typeface.createFromAsset(context.getAssets(), font);
+        return type;
+    }
+
 
     public void setListener(OnClickMenuItemListener listener) {
         mListener = listener;

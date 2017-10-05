@@ -27,10 +27,14 @@ public class SlidePanel extends FrameLayout {
         int textColor = typedArray.getColor(R.styleable.SlidePanel_text_color, Color.BLACK);
         int textTint = typedArray.getColor(R.styleable.SlidePanel_text_tint, Color.BLACK);
         int tintBackground = typedArray.getColor(R.styleable.SlidePanel_tint_item_background, Color.TRANSPARENT);
-
         int divider = typedArray.getResourceId(R.styleable.SlidePanel_divider, -1);
         int menu = typedArray.getResourceId(R.styleable.SlidePanel_menu, -1);
-        mMenuInflater = new MenuInflater(context, this, menu, textColor, textTint, tintBackground, divider);
+
+        int textSize = typedArray.getDimensionPixelSize(R.styleable.SlidePanel_text_size, 16);
+        String textStyle = typedArray.getString(R.styleable.SlidePanel_text_style);
+
+        mMenuInflater = new MenuInflater(context, this, menu, textColor, textTint, tintBackground, divider
+                , textSize, textStyle);
         typedArray.recycle();
 
     }
