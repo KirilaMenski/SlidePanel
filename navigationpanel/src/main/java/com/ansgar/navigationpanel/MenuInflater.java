@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -85,16 +86,17 @@ public class MenuInflater {
 
             final TextView text = new TextView(mContext);
             text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
+                    ViewGroup.LayoutParams.MATCH_PARENT));
             text.setText(menuItem.getTitle());
             text.setGravity(Gravity.CENTER);
-            text.setTextSize(textSize);
+            text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
             if (textStyle != null) text.setTypeface(textStyle);
             text.setTextColor(textColor);
             text.setCompoundDrawablesWithIntrinsicBounds(null, menuItem.getIcon(), null, null);
 
             linearLayout.setLayoutParams(childParams);
             linearLayout.addView(text);
+            linearLayout.setGravity(Gravity.CENTER);
             linearLayout.setOnClickListener(new ClickListener(menuItem) {
                 @Override
                 protected void onMenuItemListener(MenuItem menuItem) {
